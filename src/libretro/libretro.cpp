@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -673,14 +673,14 @@ void retro_set_environment(retro_environment_t cb)
 
   static const retro_variable values[] =
    {
-      { "melonds_boot_directly", "Boot game directly; enabled|disabled" },
-      { "melonds_screen_layout", "Screen Layout; Top/Bottom|Bottom/Top|Left/Right|Right/Left|Top Only|Bottom Only" },
+      { "melonds_boot_directly", "直接启动游戏; enabled|disabled" },
+      { "melonds_screen_layout", "屏幕布局; 上屏/下屏|下屏|上屏|左/右|有/左|仅上屏|仅下屏" },
 #ifdef HAVE_THREADS
-      { "melonds_threaded_renderer", "Threaded software renderer; disabled|enabled" },
+      { "melonds_threaded_renderer", "多线程软件渲染器; disabled|enabled" },
 #endif
-      { "melonds_touch_mode", "Touch mode; disabled|Mouse|Touch" },
+      { "melonds_touch_mode", "触摸模式; disabled|鼠标|触摸屏" },
 #ifdef HAVE_OPENGL
-      { "melonds_opengl_renderer", "OpenGL Renderer (Restart); disabled|enabled" },
+      { "melonds_opengl_renderer", "OpenGL渲染器（须重启）; disabled|enabled" },
       { "melonds_opengl_resolution", opengl_resolution.c_str() },
 #endif
       { 0, 0 }
@@ -853,17 +853,17 @@ static void check_variables(bool init)
    var.key = "melonds_screen_layout";
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
-      if (!strcmp(var.value, "Top/Bottom"))
+      if (!strcmp(var.value, "上屏/下屏"))
          layout = ScreenLayout::TopBottom;
-      else if (!strcmp(var.value, "Bottom/Top"))
+      else if (!strcmp(var.value, "下屏/上屏"))
          layout = ScreenLayout::BottomTop;
-      else if (!strcmp(var.value, "Left/Right"))
+      else if (!strcmp(var.value, "左/右"))
          layout = ScreenLayout::LeftRight;
-      else if (!strcmp(var.value, "Right/Left"))
+      else if (!strcmp(var.value, "右/左"))
          layout = ScreenLayout::RightLeft;
-      else if (!strcmp(var.value, "Top Only"))
+      else if (!strcmp(var.value, "仅上屏"))
          layout = ScreenLayout::TopOnly;
-      else if (!strcmp(var.value, "Bottom Only"))
+      else if (!strcmp(var.value, "仅下屏"))
          layout = ScreenLayout::BottomOnly;
    } else {
       layout = ScreenLayout::TopBottom;
@@ -885,9 +885,9 @@ static void check_variables(bool init)
    var.key = "melonds_touch_mode";
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
-      if (!strcmp(var.value, "Mouse"))
+      if (!strcmp(var.value, "鼠标"))
          new_touch_mode = TouchMode::Mouse;
-      else if (!strcmp(var.value, "Touch"))
+      else if (!strcmp(var.value, "触摸屏"))
          new_touch_mode = TouchMode::Touch;
       else
          new_touch_mode = TouchMode::Disabled;
@@ -1221,19 +1221,19 @@ bool retro_load_game(const struct retro_game_info *info)
    }
 
    struct retro_input_descriptor desc[] = {
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT,  "Left" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP,    "Up" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN,  "Down" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "Right" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT,  "左" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP,    "上" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN,  "下" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "右" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A, "A" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B, "B" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "Select" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "Start" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "选择" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "开始" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R, "R" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L, "L" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_X, "X" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_Y, "Y" },
-      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L2, "Make microphone noise" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L2, "产生麦克风噪音" },
       { 0 },
    };
 
